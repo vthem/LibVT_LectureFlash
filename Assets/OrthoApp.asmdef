@@ -1,0 +1,19 @@
+{
+    "name": "OrthoApp",
+    "references": [
+        "GUID:81d38608d966c904a94067dcf8d48f09",
+        "GUID:8b85c832286ae004dafaed71401752f2",
+        "GUID:286601f4c1fc5c0479e0c74b7913e8fe",
+        "GUID:d5adb05b6df72a94ebfed0fc754dee39",
+        "GUID:8cc0a9924e5856d4982b19af0e96ee02"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
