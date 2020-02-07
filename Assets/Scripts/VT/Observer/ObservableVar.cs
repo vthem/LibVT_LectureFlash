@@ -12,7 +12,7 @@ namespace VT.Observer
             set
             {
                 this.value = value;
-                ObserverRegistry.NotifyObserver(this);
+                ObserverSystem.Observers.NotifyObserver(this);
             }
         }
 
@@ -23,12 +23,12 @@ namespace VT.Observer
         public ObservableVar(string name)
         {
             Name = name;
-            VarRegistry.Add(this);
+            ObserverSystem.Vars.Add(this);
         }
 
         public void Dispose()
         {
-            VarRegistry.Remove(this);
+            ObserverSystem.Vars.Remove(this);
         }
     }
 }

@@ -5,10 +5,9 @@ namespace LectureFlash.Unity
 
     public class PlaySceneEntryPoint : MonoBehaviour
     {
-        private void Awake()
+        private void Start()
         {
-            var lectureFlash = LectureFlash.Run();
-            lectureFlash.RunState(ApplicationStates.Play);
+            App.RunState("play");
         }
     }
 }

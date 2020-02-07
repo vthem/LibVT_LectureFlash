@@ -4,16 +4,18 @@ using VT.Collection;
 
 namespace VT.Observer
 {
-    internal static class ObserverRegistry
+    internal class ObserverRegistry
     {
-        private static readonly DictionaryList<string, IObserver> observers = new DictionaryList<string, IObserver>();
+        private readonly DictionaryList<string, IObserver> observers = new DictionaryList<string, IObserver>();
+        private readonly VarRegistry varRegistry;
 
-        static ObserverRegistry()
+        internal ObserverRegistry(VarRegistry varRegistry)
         {
-            VarRegistry.VarAdded += NotifyObserver;
+            this.varRegistry = varRegistry;
+            this.varRegistry.VarAdded += NotifyObserver;
         }
 
-        public static void NotifyObserver(IObservable obj)
+        public void NotifyObserver(IObservable obj)
         {
             if (observers.TryGetList(obj.Name, out List<IObserver> observerList))
             {
@@ -31,17 +33,16 @@ namespace VT.Observer
             }
         }
 
-        public static void Add(IObserver observer)
+        public void Add(IObserver observer, bool notify = true)
         {
-            Debug.Log($"Add observer {observer.Name} -> {observer.VarName}");
             observers.Add(observer.VarName, observer);
-            if (VarRegistry.TryGetVar(observer.VarName, out IObservable obj))
+            if (notify && varRegistry.TryGetVar(observer.VarName, out IObservable obj))
             {
                 NotifyObserver(obj);
             }
         }
 
-        public static void Remove(IObserver observer)
+        public void Remove(IObserver observer)
         {
             observers.Remove(observer.VarName, observer);
         }

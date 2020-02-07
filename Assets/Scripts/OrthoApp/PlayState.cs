@@ -5,7 +5,7 @@ using VT.Observer;
 
 namespace LectureFlash
 {
-    public class PlayState : IDisposable
+    public class PlayState : IDisposable, IModuleState
     {
         private ObservableVar<string> currentWord = new ObservableVar<string>("CurrentWord");
         private readonly PlayStateConfiguration stateConfig;
@@ -36,6 +36,11 @@ namespace LectureFlash
                     yield return new WaitForSeconds(1f);
                 }
             }
+        }
+
+        public void Toggle()
+        {
+            throw new NotImplementedException();
         }
     }
 }

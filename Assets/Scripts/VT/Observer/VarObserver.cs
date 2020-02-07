@@ -11,16 +11,19 @@ namespace VT.Observer
         public string VarName { get; }
 
         public VarObserver(string observerName, string varName, Action<object> callback)
+            : this(observerName, varName, callback, true) { }
+
+        public VarObserver(string observerName, string varName, Action<object> callback, bool notifyOnCreate)
         {
             Name = observerName;
             VarName = varName;
             this.callback = callback;
-            ObserverRegistry.Add(this);
+            ObserverSystem.Observers.Add(this, notifyOnCreate);
         }
 
         public void Dispose()
         {
-            ObserverRegistry.Remove(this);
+            ObserverSystem.Observers.Remove(this);
         }
 
         public void VarUpdatedHandler(IObservable observable)

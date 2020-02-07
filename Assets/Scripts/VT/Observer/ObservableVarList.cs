@@ -26,20 +26,20 @@ namespace VT.Observer
             Name = name;
             added = new ObservableVar<T[]>($"{name}.Added");
             removed = new ObservableVar<T[]>($"{name}.Removed");
-            VarRegistry.Add(this);
+            ObserverSystem.Vars.Add(this);
         }
 
         public void AddRange(List<T> items)
         {
             T[] tmp = items.ToArray();
             Value.AddRange(items);
-            ObserverRegistry.NotifyObserver(this);
+            ObserverSystem.Observers.NotifyObserver(this);
             added.Value = tmp;
         }
 
         public void Dispose()
         {
-            VarRegistry.Remove(this);
+            ObserverSystem.Vars.Remove(this);
             added.Dispose();
             removed.Dispose();
         }
@@ -54,7 +54,7 @@ namespace VT.Observer
             T[] tmp = new T[Value.Count];
             Value.CopyTo(tmp, 0);
             Value.Clear();
-            ObserverRegistry.NotifyObserver(this);
+            ObserverSystem.Observers.NotifyObserver(this);
             removed.Value = tmp;
         }
 
@@ -78,7 +78,7 @@ namespace VT.Observer
             T[] tmp = new T[1];
             tmp[0] = item;
             Value.Add(item);
-            ObserverRegistry.NotifyObserver(this);
+            ObserverSystem.Observers.NotifyObserver(this);
             added.Value = tmp;
         }
 
@@ -89,7 +89,7 @@ namespace VT.Observer
             {
                 T[] tmp = new T[1];
                 tmp[0] = item;
-                ObserverRegistry.NotifyObserver(this);
+                ObserverSystem.Observers.NotifyObserver(this);
                 removed.Value = tmp;
             }
             return b;

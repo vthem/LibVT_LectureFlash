@@ -15,12 +15,12 @@ namespace VT.Observer
             Name = observerName;
             VarName = varName;
             this.callback = callback;
-            ObserverRegistry.Add(this);
+            ObserverSystem.Observers.Add(this);
         }
 
         public void Dispose()
         {
-            ObserverRegistry.Remove(this);
+            ObserverSystem.Observers.Remove(this);
         }
 
         public void VarUpdatedHandler(IGenericObservable<T> observable)

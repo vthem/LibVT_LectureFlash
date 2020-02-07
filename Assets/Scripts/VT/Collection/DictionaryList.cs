@@ -49,5 +49,10 @@ namespace VT.Collection
         {
             return dic.TryGetValue(key, out values);
         }
+
+        public void Clear()
+        {
+            dic.Clear();
+        }
     }
 }

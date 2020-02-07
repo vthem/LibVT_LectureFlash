@@ -6,8 +6,7 @@ namespace LectureFlash.Unity
     {
         private void Awake()
         {
-            var lectureFlash = LectureFlash.Run();
-            lectureFlash.RunState<SetupState>();
+            App.RunState(App.State.SETUP);
         }
     }
 }

@@ -1,0 +1,20 @@
+{
+    "name": "EditorTest",
+    "references": [
+        "GUID:48235ee023e9a3a4bb008652d9ff072c",
+        "GUID:4b0dd341d9d875242964f8c0e6f37f5d"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
