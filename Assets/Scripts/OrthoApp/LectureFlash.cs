@@ -43,7 +43,7 @@ namespace LectureFlash
         public void Dispose()
         {
             Lists.Dispose();
-            foreach (var wordList in WordsLists)
+            foreach (var wordList in WordsLists.Values)
             {
                 wordList.Dispose();
             }
