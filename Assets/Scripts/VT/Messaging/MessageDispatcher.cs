@@ -8,6 +8,7 @@ namespace VT.Messaging
 
         public void Dispatch(Message msg)
         {
+            MessagingSystem.Logger.Debug($"Dispatching {msg}");
             if (listeners.TryGetValue(msg.Name, out List<MessageListener> l))
             {
                 for (int i = 0; i < l.Count; ++i)

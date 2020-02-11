@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using _InputField = TMPro.TMP_InputField;
 using _Button = UnityEngine.UI.Button;
-using _Logger = VT.Core.Logger;
+using VT.Unity;
 
 namespace VT.Front
 {
@@ -19,14 +19,16 @@ namespace VT.Front
 
         private FrontObject frontObject;
 
-        private _Logger logger = new _Logger(nameof(InputFieldWithValidateButton));
-
         // Start is called before the first frame update
         void Start()
         {
             inputFieldRef.onEndEdit.AddListener(EndEditHandler);
             buttonRef.onClick.AddListener(Validate);
             frontObject = GetComponent<FrontObject>();
+            if (string.IsNullOrEmpty(messageName))
+            {
+                FrontSystem.Logger.Error($"[{transform.FullName()}] {nameof(messageName)} is null or empty");
+            }
         }
 
         private void EndEditHandler(string v)
@@ -36,8 +38,6 @@ namespace VT.Front
 
         private void Validate()
         {
-            logger.Trace();
-
             var msg = new Messaging.Message();
             msg.Set("Source", frontObject.FrontObjectName);
             msg.Set("Type", "Click");

@@ -899,11 +899,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5519954807623754961, guid: 78c3694ec372d0e409ea849d525532e1,
-        type: 3}
-      propertyPath: m_Horizontal
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7552211748079379260, guid: 78c3694ec372d0e409ea849d525532e1,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -932,6 +927,11 @@ PrefabInstance:
     - target: {fileID: 7269476932283762061, guid: 78c3694ec372d0e409ea849d525532e1,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5519954807623754961, guid: 78c3694ec372d0e409ea849d525532e1,
+        type: 3}
+      propertyPath: m_Horizontal
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2093,6 +2093,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300445139226846967, guid: 5f0e482f7c692d9409321347fe16fe46,
+        type: 3}
+      propertyPath: messageName
+      value: AddWord
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f0e482f7c692d9409321347fe16fe46, type: 3}

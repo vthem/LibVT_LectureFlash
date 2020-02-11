@@ -3,22 +3,22 @@ using System.Collections.Generic;
 
 namespace VT.Front
 {
-    internal static class Registry
+    internal class Registry
     {
         public static Collection.Registry<string, FrontObject> Objects { get; } = new Collection.Registry<string, FrontObject>();
         public static Collection.Registry<string, FrontObjectComponent> Components { get; } = new Collection.Registry<string, FrontObjectComponent>();
 
-        static Registry()
+        internal Registry()
         {
             Objects.Removed += ViewObjectRemovedHandler;
         }
 
-        private static void ViewObjectRemovedHandler(string id, FrontObject obj)
+        private void ViewObjectRemovedHandler(string id, FrontObject obj)
         {
             RemoveComponentOfObject(obj);
         }
 
-        public static void RemoveComponentOfObject(FrontObject obj)
+        public void RemoveComponentOfObject(FrontObject obj)
         {
             if (Components.TryGet(obj.Identifier, out List<FrontObjectComponent> components))
             {

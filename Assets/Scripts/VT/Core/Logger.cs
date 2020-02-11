@@ -7,12 +7,7 @@ namespace VT.Core
     public class Logger
     {
         private StringBuilder sb = new StringBuilder(2048);
-        public string Name { get; private set; } = string.Empty;
-
-        public Logger(string name)
-        {
-            Name = name;
-        }
+        public virtual string Name { get; } = nameof(VT.Core);
 
         public void Trace(
             [CallerMemberName] string memberName = "",
@@ -20,15 +15,36 @@ namespace VT.Core
             [CallerLineNumber] int sourceLineNumber = 0)
         {
             sb.Clear();
-            sb.AppendFormat("[{0}] {1}:{2}+{3}", Name, System.IO.Path.GetFileName(sourceFilePath), memberName, sourceLineNumber);
+            sb.AppendFormat("[TRC] [{0}] {1}:{2}+{3}", Name, System.IO.Path.GetFileName(sourceFilePath), memberName, sourceLineNumber);
             _Unity.Debug.Log(sb.ToString());
         }
 
         public void Debug(object message)
         {
             sb.Clear();
-            sb.AppendFormat("[{0}] {1}", Name, message);
+            sb.AppendFormat("[DBG] [{0}] {1}", Name, message);
             _Unity.Debug.Log(sb.ToString());
+        }
+
+        public void Info(object message)
+        {
+            sb.Clear();
+            sb.AppendFormat("[NFO] [{0}] {1}", Name, message);
+            _Unity.Debug.Log(sb.ToString());
+        }
+
+        public void Warning(object message)
+        {
+            sb.Clear();
+            sb.AppendFormat("[WRN] [{0}] {1}", Name, message);
+            _Unity.Debug.LogWarning(sb.ToString());
+        }
+
+        public void Error(object message)
+        {
+            sb.Clear();
+            sb.AppendFormat("[ERR] [{0}] {1}", Name, message);
+            _Unity.Debug.LogError(sb.ToString());
         }
     }
 }

@@ -39,7 +39,7 @@ namespace VT.Front
                 {
                     if (Registry.Components.TryGet(obj.Identifier, out List<FrontObjectComponent> components))
                     {
-                        Registry.RemoveComponentOfObject(obj);
+                        FrontSystem.Registry.RemoveComponentOfObject(obj);
                     }
                 }
             }
