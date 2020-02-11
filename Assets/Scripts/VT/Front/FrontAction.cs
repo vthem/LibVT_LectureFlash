@@ -5,17 +5,19 @@ namespace VT.Front
 {
     public class FrontAction : IDisposable
     {
+        private MessageListener messageListener;
         private readonly string messageName;
-        private readonly Action<Message> messageHandler;
-        private readonly MessageListener messageListener;
         private static readonly MessageDispatcher dispatcher = new MessageDispatcher();
 
 
-        public FrontAction(string messageName, Action<Message> messageHandler)
+        public FrontAction(string messageName/*, Action<Message> messageHandler*/)
         {
             this.messageName = messageName;
-            this.messageHandler = messageHandler;
-            messageListener = new MessageListener(dispatcher, messageName, messageHandler);
+        }
+
+        public void Listen(Action<Message> message)
+        {
+
         }
 
         internal static void Dispatch(Message message)

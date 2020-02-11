@@ -2099,6 +2099,11 @@ PrefabInstance:
       propertyPath: messageName
       value: AddWord
       objectReference: {fileID: 0}
+    - target: {fileID: 8727606673823137394, guid: 5f0e482f7c692d9409321347fe16fe46,
+        type: 3}
+      propertyPath: frontObjectName
+      value: CurrentWordList
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f0e482f7c692d9409321347fe16fe46, type: 3}
 --- !u!224 &9136065657084300451 stripped

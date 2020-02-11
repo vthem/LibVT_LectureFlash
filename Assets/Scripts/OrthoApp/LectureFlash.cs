@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using VT.Front;
 using VT.Messaging;
 using VT.Observer;
 
@@ -63,8 +64,15 @@ namespace LectureFlash
 
         public void Toggle()
         {
-            new MessageListener(App.Dispatcher, App.Action.AddWord.NAME, AddWord);
-            new MessageListener(App.Dispatcher, App.Action.RemoveWord.NAME, RemoveWord);
+            //new MessageListener(App.Dispatcher, App.Action.AddWord.NAME, AddWord);
+            //new MessageListener(App.Dispatcher, App.Action.RemoveWord.NAME, RemoveWord);
+            new FrontAction("CurrentWordList:InputField").AddInputFieldSubmitAdd((string value) => ());
+            FrontSystem.GetObject
+        }
+
+        private void TestFunc(TestIt test)
+        {
+
         }
 
         private void AddWord(Message msg)
