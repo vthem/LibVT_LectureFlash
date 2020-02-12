@@ -21,11 +21,12 @@ namespace VT.Front
 
         private void ClickHandler()
         {
-            var msg = new Messaging.Message();
-            msg.Set("Source", frontObject.FrontObjectName);
-            msg.Set("Type", "Click");
-            msg.Name = messageName;
-            FrontAction.Dispatch(msg);
+            throw new System.Exception("broken");
+            //var msg = new Messaging.Message();
+            //msg.Set("Source", frontObject.FrontObjectName);
+            //msg.Set("Type", "Click");
+            //msg.Name = messageName;
+            //FrontAction.Dispatch(msg);
         }
     }
 }

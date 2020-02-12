@@ -1,33 +1,51 @@
 ﻿using System;
-using VT.Messaging;
+using System.Collections.Generic;
+using VT.Collection;
 
 namespace VT.Front
 {
     public class FrontAction : IDisposable
     {
-        private MessageListener messageListener;
-        private readonly string messageName;
-        private static readonly MessageDispatcher dispatcher = new MessageDispatcher();
+        private static DictionaryList<string, FrontAction> actionsByTarget = new DictionaryList<string, FrontAction>();
+        private readonly string targetFrontObject;
+        private Action<string> submitCallback;
 
-
-        public FrontAction(string messageName/*, Action<Message> messageHandler*/)
+        public FrontAction(string targetFrontObject)
         {
-            this.messageName = messageName;
-        }
-
-        public void Listen(Action<Message> message)
-        {
-
-        }
-
-        internal static void Dispatch(Message message)
-        {
-            dispatcher.Dispatch(message);
+            this.targetFrontObject = targetFrontObject;
+            actionsByTarget.Add(targetFrontObject, this);
         }
 
         public void Dispose()
         {
-            messageListener.Dispose();
+            actionsByTarget.Remove(targetFrontObject, this);
+        }
+
+        public FrontAction OnSubmit(Action<string> callback)
+        {
+            submitCallback = callback;
+            return this;
+        }
+
+        internal static void Submit(string source, string value)
+        {
+            FrontSystem.Logger.Debug($"Submit {source} {value}");
+            if (!actionsByTarget.TryGetList(source, out List<FrontAction> actions))
+            {
+                return;
+            }
+            for (int i = 0; i < actions.Count; ++i)
+            {
+                try
+                {
+                    actions[i]?.submitCallback(value);
+
+                }
+                catch (Exception ex)
+                {
+                    UnityEngine.Debug.LogException(ex);
+                }
+            }
         }
     }
 }

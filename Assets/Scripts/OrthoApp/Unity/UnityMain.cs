@@ -14,24 +14,9 @@ namespace LectureFlash.Unity
         {
             App.PersistentDataPath = Application.persistentDataPath;
             App.Main();
-
-            StartCoroutine(TestApp());
-        }
-
-        private IEnumerator TestApp()
-        {
-            bool testFinished = false;
-            bool testSucceed = false;
-            new VarObserver("test", App.Var.CURRENT_STATE, (_obj) =>
-            {
-                testSucceed = (string)_obj == App.State.SETUP;
-                testFinished = true;
-            });
             App.RunState(App.State.SETUP);
-            yield return new WaitUntil(() => testFinished);
-            Debug.Log($"Status={testSucceed}");
-
         }
+
 
         // Update is called once per frame
         void Update()

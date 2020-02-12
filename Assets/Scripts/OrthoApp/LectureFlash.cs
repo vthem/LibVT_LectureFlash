@@ -7,6 +7,11 @@ using VT.Observer;
 
 namespace LectureFlash
 {
+    public class Logger : VT.Core.Logger
+    {
+        public override string Name => nameof(LectureFlash);
+    }
+
     public class Words : IDisposable
     {
         public ObservableVarList<string> Lists { get; private set; } = new ObservableVarList<string>("Words.Lists");
@@ -22,6 +27,7 @@ namespace LectureFlash
 
         public void AddWord(string word, string listName)
         {
+            App.Logger.Info($"{word} => {listName}");
             ObservableVarList<string> words;
             if (WordsLists.TryGetValue(listName, out words))
             {
@@ -66,35 +72,8 @@ namespace LectureFlash
         {
             //new MessageListener(App.Dispatcher, App.Action.AddWord.NAME, AddWord);
             //new MessageListener(App.Dispatcher, App.Action.RemoveWord.NAME, RemoveWord);
-            new FrontAction("CurrentWordList:InputField").AddInputFieldSubmitAdd((string value) => ());
-            FrontSystem.GetObject
-        }
-
-        private void TestFunc(TestIt test)
-        {
-
-        }
-
-        private void AddWord(Message msg)
-        {
-            string word;
-            if (!msg.TryGet(App.Action.AddWord.P_WORD, out word))
-                return;
-            string list;
-            if (!msg.TryGet(App.Action.AddWord.P_LIST, out list))
-                return;
-            Words.AddWord(word, list);
-        }
-
-        private void RemoveWord(Message msg)
-        {
-            string word;
-            if (!msg.TryGet(App.Action.RemoveWord.P_WORD, out word))
-                return;
-            string list;
-            if (!msg.TryGet(App.Action.RemoveWord.P_LIST, out list))
-                return;
-            Words.RemoveWord(word, list);
+            new FrontAction("CurrentWordList:InputField")
+                .OnSubmit((string value) => { Words.AddWord("Default", value); });
         }
     }
 
@@ -133,7 +112,8 @@ namespace LectureFlash
         }
 
         public static string PersistentDataPath { get; set; } = string.Empty;
-        public static MessageDispatcher Dispatcher { get; private set; }
+        //public static MessageDispatcher Dispatcher { get; private set; }
+        public static Logger Logger { get; private set; } = new Logger();
 
         private static App instance;
 
@@ -142,11 +122,12 @@ namespace LectureFlash
 
         public App()
         {
-            Dispatcher = new MessageDispatcher();
+            //Dispatcher = new MessageDispatcher();
         }
 
         public static void Main()
         {
+            Logger.Info("Application started");
             instance = new App();
         }
 
@@ -157,10 +138,13 @@ namespace LectureFlash
 
         private void _RunState(string state)
         {
+            Logger.Info($"{currentState.Value} => {state}");
+
             if (currentState.Value == state)
             {
                 return;
             }
+            
             switch (state)
             {
                 case State.SETUP:

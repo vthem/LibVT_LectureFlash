@@ -45,9 +45,10 @@ namespace VT.Front
 
         private void OnClickHandler()
         {
-            var message = new Message { Name = "Click" }
-                .Set("Source", FrontObjectName);
-            FrontAction.Dispatch(message);
+            throw new System.Exception("broken");
+            //var message = new Message { Name = "Click" }
+            //    .Set("Source", FrontObjectName);
+            //FrontAction.Dispatch(message);
         }
     }
 }

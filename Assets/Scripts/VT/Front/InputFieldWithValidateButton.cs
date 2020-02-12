@@ -42,18 +42,7 @@ namespace VT.Front
             if (string.IsNullOrEmpty(inputFieldRef.text))
                 return;
 
-            var msg = new Messaging.Message();
-            msg.Set("Source", frontObject.FrontObjectName);
-            msg.Set("Type", "Submit");
-            msg.Set("Value", inputFieldRef.text);
-            msg.Name = messageName;
-            FrontAction.Dispatch(msg);
-        }
-
-        public static FrontAction AddInputFieldSubmit(this FrontAction frontAction, Action<string> action)
-        {
-            frontAction.MessageHandler =
-            return frontAction;
+            FrontAction.Submit(frontObject.FrontObjectName, inputFieldRef.text);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Tests
         [UnityTest]
         public IEnumerator SwitchToSetup()
         {
-            VT.Observer.ObserverSystem.Initialize();
+            //VT.Observer.ObserverSystem.Initialize();
             App.PersistentDataPath = Application.persistentDataPath;
             App.Main();
 
@@ -39,7 +39,7 @@ namespace Tests
         [UnityTest]
         public IEnumerator AddWord()
         {
-            VT.Observer.ObserverSystem.Initialize();
+            //VT.Observer.ObserverSystem.Initialize();
             App.PersistentDataPath = Application.persistentDataPath;
             App.Main();
 
