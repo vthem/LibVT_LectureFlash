@@ -5,8 +5,8 @@ namespace VT.Front
 {
     internal class Registry
     {
-        public static Collection.Registry<string, FrontObject> Objects { get; } = new Collection.Registry<string, FrontObject>();
-        public static Collection.Registry<string, FrontObjectComponent> Components { get; } = new Collection.Registry<string, FrontObjectComponent>();
+        public Collection.Registry<string, FrontObject> Objects { get; } = new Collection.Registry<string, FrontObject>();
+        public Collection.Registry<string, FrontObjectComponent> Components { get; } = new Collection.Registry<string, FrontObjectComponent>();
 
         internal Registry()
         {

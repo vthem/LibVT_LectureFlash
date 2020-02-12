@@ -13,8 +13,8 @@ namespace VT.Front
         {
             ComponentConstructor = constructor;
             targetObjectName = objectName;
-            Registry.Objects.Added += ObjectAddedHandler;
-            if (Registry.Objects.TryGet(objectName, out List<FrontObject> objs))
+            FrontSystem.Objects.Added += ObjectAddedHandler;
+            if (FrontSystem.Objects.TryGet(objectName, out List<FrontObject> objs))
             {
                 foreach (var obj in objs)
                 {
@@ -27,17 +27,17 @@ namespace VT.Front
         {
             var component = ComponentConstructor();
             component.Initialize(obj);
-            Registry.Components.Add(obj.Identifier, component);
+            FrontSystem.Components.Add(obj.Identifier, component);
         }
 
         public void Dispose()
         {
-            Registry.Objects.Added -= ObjectAddedHandler;
-            if (Registry.Objects.TryGet(targetObjectName, out List<FrontObject> objs))
+            FrontSystem.Objects.Added -= ObjectAddedHandler;
+            if (FrontSystem.Objects.TryGet(targetObjectName, out List<FrontObject> objs))
             {
                 foreach (var obj in objs)
                 {
-                    if (Registry.Components.TryGet(obj.Identifier, out List<FrontObjectComponent> components))
+                    if (FrontSystem.Components.TryGet(obj.Identifier, out List<FrontObjectComponent> components))
                     {
                         FrontSystem.Registry.RemoveComponentOfObject(obj);
                     }
