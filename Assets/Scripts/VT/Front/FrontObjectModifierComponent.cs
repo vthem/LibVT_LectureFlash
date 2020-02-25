@@ -1,5 +1,6 @@
 ﻿using VT.Observer;
 using System;
+using VT.Unity;
 
 namespace VT.Front
 {
@@ -26,7 +27,7 @@ namespace VT.Front
 
         internal FrontObjectModifierComponent(string frontObjectName, string varName, Action<Component, Var> modify) : base(frontObjectName)
         {
-            observer = new GenericVarObserver<Var>(component.name, varName, VarUpdated);
+            observer = new GenericVarObserver<Var>($"{frontObjectName}:{varName}", varName, VarUpdated);
             this.modify = modify;
         }
 
@@ -46,8 +47,19 @@ namespace VT.Front
 
         protected override void InnerInitialize()
         {
+            if (Object == null)
+            {
+                FrontSystem.Logger.Error($"Object is null in InnerInitialize of {FrontObjectName}");
+                return;
+            }
             component = Object?.GetComponent<Component>();
             componentSet = component != null;
+            if (!componentSet)
+            {
+                FrontSystem.Logger.Error($"Failed to get {typeof(Component)} on {FrontObjectName} Path={Object.transform.FullName()} Id={Object.Identifier}");
+                return;
+            }
+            observer.Sync();
         }
     }
 }

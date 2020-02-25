@@ -14,11 +14,12 @@ namespace VT.Observer
         {
             try
             {
+                ObserverSystem.Logger.Debug($"Add var to registry Name={observable.Name} Type={observable.TypeString}");
                 vars.Add(observable.Name, observable);
             }
             catch (ArgumentException ex)
             {
-                Debug.LogError($"IObservable {observable.Name} already exist {ex.Message}");
+                ObserverSystem.Logger.Error($"IObservable {observable.Name} already exist {ex.Message}");
             }
             finally
             {
@@ -28,6 +29,7 @@ namespace VT.Observer
 
         public void Remove(IObservable observable)
         {
+            ObserverSystem.Logger.Debug($"Remove var from registry Name={observable.Name} Type={observable.TypeString}");
             vars.Remove(observable.Name);
         }
 

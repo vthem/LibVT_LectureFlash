@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 using VT.Front;
 using VT.Messaging;
 using VT.Observer;
@@ -14,7 +15,7 @@ namespace LectureFlash
 
     public class Words : IDisposable
     {
-        public ObservableVarList<string> Lists { get; private set; } = new ObservableVarList<string>("Words.Lists");
+        public ObservableVarList<string> ListNames { get; private set; } = new ObservableVarList<string>("Words.Lists");
 
         public Dictionary<string, ObservableVarList<string>> WordsLists { get; private set; } = new Dictionary<string, ObservableVarList<string>>();
 
@@ -22,7 +23,8 @@ namespace LectureFlash
         {
             ObservableVarList<string> wordList = new ObservableVarList<string>($"Words.Lists.{listName}");
             wordList.AddRange(words);
-            Lists.Add(listName);
+            ListNames.Add(listName);
+            WordsLists.Add(listName, wordList);
         }
 
         public void AddWord(string word, string listName)
@@ -49,7 +51,7 @@ namespace LectureFlash
 
         public void Dispose()
         {
-            Lists.Dispose();
+            ListNames.Dispose();
             foreach (var wordList in WordsLists.Values)
             {
                 wordList.Dispose();
@@ -72,8 +74,18 @@ namespace LectureFlash
         {
             //new MessageListener(App.Dispatcher, App.Action.AddWord.NAME, AddWord);
             //new MessageListener(App.Dispatcher, App.Action.RemoveWord.NAME, RemoveWord);
-            new FrontAction("CurrentWordList:InputField")
-                .OnSubmit((string value) => { Words.AddWord("Default", value); });
+            new FrontAction("CurrentList.InputField")
+                .OnSubmit((string value) => { Words.AddWord(value, "Default"); });
+            new FrontObjectModifier<ScrollViewChildController, List<string>>(
+                "CurrentList",
+                "Words.Lists.Default",
+                (ctl, sync) => ctl.Sync(sync, InitializeWordListEntryItem));
+        }
+
+        void InitializeWordListEntryItem(GameObject gameObject, string name)
+        {
+            var entry = gameObject.GetComponent<Unity.WordListEntry>();
+            entry.SetWord(name);
         }
     }
 
@@ -144,7 +156,7 @@ namespace LectureFlash
             {
                 return;
             }
-            
+
             switch (state)
             {
                 case State.SETUP:

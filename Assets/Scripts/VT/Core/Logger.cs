@@ -19,17 +19,17 @@ namespace VT.Core
             _Unity.Debug.Log(sb.ToString());
         }
 
-        public void Debug(object message, [CallerMemberName] string memberName = "")
+        public void Debug(object message)
         {
             sb.Clear();
-            sb.AppendFormat("[DBG] [{0}] {1} > {2}", Name, memberName, message);
+            sb.AppendFormat("[DBG] [{0}] {1}", Name, message);
             _Unity.Debug.Log(sb.ToString());
         }
 
-        public void Info(object message, [CallerMemberName] string memberName = "")
+        public void Info(object message)
         {
             sb.Clear();
-            sb.AppendFormat("[NFO] [{0}] {1} > {2}", Name, memberName, message);
+            sb.AppendFormat("[NFO] [{0}] {1}", Name, message);
             _Unity.Debug.Log(sb.ToString());
         }
 

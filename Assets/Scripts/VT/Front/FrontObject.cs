@@ -20,6 +20,7 @@ namespace VT.Front
             {
                 register = true;
                 identifier = $"{frontObjectName}#{gameObject.GetInstanceID()}";
+                FrontSystem.Logger.Debug($"Register FrontObject Name={frontObjectName} Id={identifier}");
                 FrontSystem.Objects.Add(FrontObjectName, this);
             }
         }
@@ -31,6 +32,7 @@ namespace VT.Front
 
         private void OnDestroy()
         {
+            FrontSystem.Logger.Debug($"Unregister FrontObject Name={frontObjectName} Id={identifier}");
             FrontSystem.Objects.Remove(FrontObjectName, this);
         }
     }

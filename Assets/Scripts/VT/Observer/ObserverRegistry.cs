@@ -35,6 +35,7 @@ namespace VT.Observer
 
         public void Add(IObserver observer, bool notify = true)
         {
+            ObserverSystem.Logger.Debug($"Name={observer.Name} is observing VarName={observer.VarName}");
             observers.Add(observer.VarName, observer);
             if (notify && varRegistry.TryGetVar(observer.VarName, out IObservable obj))
             {
@@ -44,6 +45,7 @@ namespace VT.Observer
 
         public void Remove(IObserver observer)
         {
+            ObserverSystem.Logger.Debug($"Name={observer.Name} is NOT observing VarName={observer.VarName}");
             observers.Remove(observer.VarName, observer);
         }
     }

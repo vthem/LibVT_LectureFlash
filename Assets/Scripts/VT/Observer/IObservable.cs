@@ -4,5 +4,6 @@
     {
         object Value { get; }
         string Name { get; }
+        string TypeString { get; }
     }
 }

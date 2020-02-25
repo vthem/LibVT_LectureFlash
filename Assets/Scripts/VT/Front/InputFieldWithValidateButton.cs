@@ -10,9 +10,6 @@ namespace VT.Front
     public class InputFieldWithValidateButton : MonoBehaviour
     {
         [SerializeField]
-        private string messageName = string.Empty;
-
-        [SerializeField]
         private _Button buttonRef = null;
 
         [SerializeField]
@@ -26,10 +23,6 @@ namespace VT.Front
             inputFieldRef.onSubmit.AddListener(OnSubmitHandler);
             buttonRef.onClick.AddListener(SubmitValue);
             frontObject = GetComponent<FrontObject>();
-            if (string.IsNullOrEmpty(messageName))
-            {
-                FrontSystem.Logger.Error($"[{transform.FullName()}] {nameof(messageName)} is null or empty");
-            }
         }
 
         private void OnSubmitHandler(string v)

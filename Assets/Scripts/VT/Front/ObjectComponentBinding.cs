@@ -23,8 +23,10 @@ namespace VT.Front
             }
         }
 
-        private void ObjectAddedHandler(string id, FrontObject obj)
+        private void ObjectAddedHandler(string frontObjectName, FrontObject obj)
         {
+            if (frontObjectName != targetObjectName)
+                return;
             var component = ComponentConstructor();
             component.Initialize(obj);
             FrontSystem.Components.Add(obj.Identifier, component);

@@ -21,6 +21,9 @@ namespace VT.Observer
         private ObservableVar<T[]> added;
         private ObservableVar<T[]> removed;
 
+        public string TypeString => string.IsNullOrEmpty(typeString) ? typeString = $"ArrayOf'{typeof(T).ToString()}'" : typeString;
+        private string typeString = null;
+
         public ObservableVarList(string name)
         {
             Name = name;

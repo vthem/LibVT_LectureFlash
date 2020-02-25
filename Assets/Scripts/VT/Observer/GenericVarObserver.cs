@@ -33,9 +33,12 @@ namespace VT.Observer
             VarUpdatedHandler(observable as IGenericObservable<T>);
         }
 
-        public static implicit operator GenericVarObserver<T>(VarObserver v)
+        public void Sync()
         {
-            throw new NotImplementedException();
+            if (ObserverSystem.Vars.TryGetVar(VarName, out IObservable observable))
+            {
+                VarUpdatedHandler(observable);
+            }
         }
     }
 }

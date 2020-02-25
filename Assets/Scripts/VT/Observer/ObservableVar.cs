@@ -20,6 +20,9 @@ namespace VT.Observer
 
         object IObservable.Value => Value;
 
+        public string TypeString => string.IsNullOrEmpty(typeString) ? typeString = typeof(T).ToString() : typeString;
+        private string typeString = null;
+
         public ObservableVar(string name)
         {
             Name = name;
